@@ -11,7 +11,30 @@ const ChatFeed = (props) => {
 
     const { chats, activeChat, userName, messages } = props;
 
-    const chat = chats && chats(activeChat);
+    const chat = chats && chats[activeChat];
+
+    //This function will redner on left or right side base on owner
+    //it will return the message of left to right side
+    // will map thru each person , when loop run index and person 
+
+    //will get id of message then render the component
+
+    //talking all message , mapping thru all pepl, render based on owner or Guest based on left or right side
+    const renderReadReceipts = (message, isMyMessage) => {
+        chat.people.map((person, index) => {
+            person.last_read === message.id
+                &&
+                <div>
+                    key = {`read_${index}`}
+                    className="read-recipts"
+                    style ={{
+                        float: isMyMessage ? 'right' : 'left',
+                        backgroundImage: person.person.avatar && `url(${person.person.avatar})`
+                    }}
+                </div>
+        })
+
+    }
 
     const renderMessages = () => {
         const keys = Object.keys(messages);
@@ -37,6 +60,7 @@ const ChatFeed = (props) => {
                             marginRight: isMyMessage ? '18px' : '0px',
                             marginLeft: isMyMessage ? '0px' : '68px'
                         }}>
+                        {renderReadReceipts(message, isMyMessage)}
 
                     </div>
 
@@ -47,23 +71,26 @@ const ChatFeed = (props) => {
         });
     }
 
+    if (!chat) return <div />;
+
+
     return (
-     
+
         <div className="chat-feed">
             <div className="chat-title-container">
                 <div className="chat-title"> {chat?.title}</div>
                 <div className="chat-subtitle"></div>
-                
-             
+
+
             </div>
 
             {renderMessages()}
-            <div style={{height:'100px'}}/> 
-             {/* to have some gap between render message  */}
+            <div style={{ height: '100px' }} />
+            {/* to have some gap between render message  */}
 
-             <div className="message-form-container">
-             <MessageForm {...props} chatId={activeChat} />
-             </div>
+            <div className="message-form-container">
+                <MessageForm {...props} chatId={activeChat} />
+            </div>
         </div>
     )
 }
