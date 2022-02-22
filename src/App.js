@@ -2,8 +2,14 @@ import './App.css';
 import { ChatEngine } from 'react-chat-engine';
 import  oneplus from './onplus.mp3';
 import ChatFeed from './Components/ChatFeed';
+import LoginForm from './Components/LoginForm';
+
 
 function App() {
+
+
+  if(!localStorage.getItem('username')) return <LoginForm/>
+
   return (
     <div className="App">
       <div className="container ds-flex mt-5 align-item-center justify-content-center text-center">
