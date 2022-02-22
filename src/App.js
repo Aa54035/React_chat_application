@@ -1,5 +1,7 @@
 import './App.css';
 import { ChatEngine } from 'react-chat-engine';
+import  oneplus from './onplus.mp3';
+import ChatFeed from './Components/ChatFeed';
 
 function App() {
   return (
@@ -10,9 +12,10 @@ function App() {
 
       <ChatEngine height="100vh" projectID="aec87bbf-4bf4-4684-a567-50f3dbf20e31"
         userName="aa54035@gmail.com"
-        userSecret="Ash@123456">
-        
-        </ChatEngine>
+        userSecret="Ash@123456"
+        renderChatFeed = { (chatAppProps) => <ChatFeed  {...chatAppProps}/> }
+         onNewMessage = {()=> new Audio('oneplus').play() }
+         />
     </div>
     
   );
