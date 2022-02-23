@@ -6,6 +6,7 @@ const projectID = "aec87bbf-4bf4-4684-a567-50f3dbf20e31";
 
 const LoginForm = () => {
 
+
     const [userName, setUseName] = useState('');
     const [password, setPassword] = useState('')
     const [error, setError] = useState('');
@@ -15,7 +16,7 @@ const LoginForm = () => {
         const authObject = { 'Project-ID': projectID, 'User-Name': 'userName', 'User-Secret': password };
 
         try {
-            await axios.get('https://api.chatengine.io/charts', { headers: authObject });
+            await axios.get('https://api.chatengine.io/chats', { headers: authObject });
             // we will store them in localhost storage 
 
             localStorage.setItem('username', userName);
